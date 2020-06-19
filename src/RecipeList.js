@@ -51,7 +51,7 @@ class RecipeList extends Component {
  }
 
  static propTypes = {
-  recipes: PropTypes.arrayOf(PropTypes.object)
+  recipes: PropTypes.arrayOf(PropTypes.object).isRequired
  }
 
  render() {
