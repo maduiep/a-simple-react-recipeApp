@@ -9,7 +9,7 @@ class RecipeApp extends Component {
     return (
       <div className="App">
       <Navbar />
-        
+        <RecipeList />
       </div>
     )
   }
