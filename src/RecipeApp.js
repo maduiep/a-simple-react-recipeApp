@@ -5,11 +5,63 @@ import RecipeList from './RecipeList'
 import Navbar from './Navbar'
 
 class RecipeApp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      recipes: [
+        {
+          id: 1,
+          title: 'Nigerian Shawarma',
+          instructions: 'Mix Ingredients',
+          ingredients: [
+            '2 Chicken breasts(de-boned/boneless)',
+            '6+ Shawarma bread(either pita bread/flour tortilla wraps)',
+            '1 small sized Cabbage(cut into thin strips)',
+            '3 medium sized Carrots(grated or cut into thin strips)',
+            '1 large Cucumber(cut into thin strips&circles)',
+            '2 big Tomatoes(cut into thin strips)',
+            '1 medium sized Onions(cut into thin strips)',
+            'Ketchup',
+            'Mayonnaise',
+            '1 Tablespoon Vegetable /olive oil(for stir frying)'
+          ],
+          img: 'dinner.jpg'
+        },
+        {
+          id: 2,
+          title: 'Burger',
+          instructions: 'Mix Ingredients',
+          ingredients: [
+            'Divide the beef into 4 equal portions. Press a cube of pepper jack into the center of each and shape the meat around the cheese; form into patties, about 4 inches wide and 3/4 inch thick. Season the patties with salt and pepper. ',
+            'Heat the vegetable oil in a large skillet over medium-high heat. Add the patties and cook until browned on the bottom, about 4 minutes. Flip the patties and top each with a slice of Cheddar; cook 4 to 5 more minutes. ',
+            'Meanwhile, toast the hamburger buns and spread with ketchup, mustard and/or mayonnaise. Fill with the burgers and top with lettuce, tomato and/or red onion. Serve with pickles. '
+          ],
+          img: 'burger.jpg'
+        },
+        {
+          id: 3,
+          title: 'Strawberry Ice Cream',
+          instructions: 'I used whole milk and half and half (instead of cream). No food coloring. Used frozen strawberries that I thawed. Blended all with a wand blender before I put it in the ice cream maker',
+          ingredients: [
+            '2 cups whole milk',
+            '2 cups heavy cream',
+            '1 cup white sugar',
+            '¼ teaspoon salt',
+            '2 teaspoons vanilla extract',
+            '2 cups mashed fresh strawberries',
+            '2 drops red food coloring'
+          ],
+          img: 'strawberry.jpg'
+        }
+      ],
+      nextRecipeId: 3,
+    }
+  }
   render() {
     return (
       <div className="App">
-      <Navbar />
-        <RecipeList />
+        <Navbar />
+        <RecipeList recipes={this.state.recipes} />
       </div>
     )
   }
