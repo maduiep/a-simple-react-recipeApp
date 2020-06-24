@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Recipe from './Recipe'
 import './RecipeApp.css';
+import RecipeInput from './RecipeInput'
 import RecipeList from './RecipeList'
 import Navbar from './Navbar'
 
@@ -10,7 +11,7 @@ class RecipeApp extends Component {
     this.state = {
       recipes: [
         {
-          id: 1,
+          id: 0,
           title: 'Nigerian Shawarma',
           instructions: 'Mix Ingredients',
           ingredients: [
@@ -28,7 +29,7 @@ class RecipeApp extends Component {
           img: 'dinner.jpg'
         },
         {
-          id: 2,
+          id: 1,
           title: 'Burger',
           instructions: 'Mix Ingredients',
           ingredients: [
@@ -39,7 +40,7 @@ class RecipeApp extends Component {
           img: 'burger.jpg'
         },
         {
-          id: 3,
+          id: 2,
           title: 'Strawberry Ice Cream',
           instructions: 'I used whole milk and half and half (instead of cream). No food coloring. Used frozen strawberries that I thawed. Blended all with a wand blender before I put it in the ice cream maker',
           ingredients: [
@@ -55,13 +56,41 @@ class RecipeApp extends Component {
         }
       ],
       nextRecipeId: 3,
+      showForm: false
     }
+    this.handleSave = this.handleSave.bind(this)
+    this.onDelete = this.onDelete.bind(this)
   }
+
+  handleSave(recipe) {
+    this.setState((prevState, props) => {
+      const newRecipe = { ...recipe, id: this.state.nextRecipeId }
+      return {
+        nextRecipeId: prevState.nextRecipeId + 1,
+        recipes: [...this.state.recipes, newRecipe],
+        showForm: false
+      }
+    })
+  }
+
+  onDelete(id) {
+    const recipes = this.state.recipes.filter(r => r.id !== id)
+    this.setState({recipes})
+  }
+
+
   render() {
+    const { showForm } = this.state
     return (
       <div className="App">
-        <Navbar />
-        <RecipeList recipes={this.state.recipes} />
+        <Navbar onNewRecipe={() => this.setState({ showForm: true })} />
+        {showForm ?
+          <RecipeInput
+            onSave={this.handleSave}
+            onClose={() => this.setState({ showForm: false })}
+          /> :
+          null}
+        <RecipeList onDelete={this.onDelete} recipes={this.state.recipes} />
       </div>
     )
   }
